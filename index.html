@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <!-- ==================================================== -->
+  <!-- SECTION 01 — DOCUMENT SETUP AND METADATA              -->
+  <!-- Change the title and description here.                -->
+  <!-- ==================================================== -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GreenClass — Learn at Your Own Pace</title>
+  <meta name="description" content="GreenClass: free notes, lecture notes, previous-year questions and practice quizzes for CBSE Classes 8 to 12.">
+  <meta name="theme-color" content="#1f5a3c">
+  <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
+
+  <!-- ==================================================== -->
+  <!-- SECTION 02 — WEBSITE THEME AND FONT IMPORTS           -->
+  <!-- Fonts load from Google Fonts. If you are offline, the -->
+  <!-- site falls back to Georgia and system fonts.          -->
+  <!-- ==================================================== -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <div class="nature-bg" aria-hidden="true"></div>
+
+  <!-- ==================================================== -->
+  <!-- SECTION 03 — HEADER AND NAVIGATION BAR                -->
+  <!-- ==================================================== -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#home" aria-label="GreenClass home">
+        <img src="assets/icons/logo.svg" alt="" width="42" height="42">
+        <span class="brand-text"><strong>GreenClass</strong><small>Learn at Your Own Pace</small></span>
+      </a>
+      <button id="navToggle" class="icon-btn nav-toggle" type="button" aria-expanded="false" aria-controls="mainNav" aria-label="Open menu">
+        <span aria-hidden="true">☰</span>
+      </button>
+      <nav id="mainNav" class="main-nav" aria-label="Main navigation">
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#classes">Classes</a></li>
+          <li><a href="#materials">Study Materials</a></li>
+          <li><a href="#pyq">PYQs</a></li>
+          <li><a href="#quiz">Quizzes</a></li>
+          <li><a href="#planner">Study Planner</a></li>
+          <li><a href="#about">About</a></li>
+        </ul>
+      </nav>
+      <button id="themeToggle" class="icon-btn" type="button" aria-pressed="false" aria-label="Switch to dark theme">
+        <span id="themeIcon" aria-hidden="true">☾</span>
+      </button>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- ==================================================== -->
+    <!-- SECTION 04 — HERO SECTION                             -->
+    <!-- ==================================================== -->
+    <section id="home" class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy glass">
+          <p class="session-pill" id="sessionBadge">Session 2026–27</p>
+          <h1>Learn Better. Grow Brighter.</h1>
+          <p class="lead">Your peaceful space for notes, lectures, practice papers, and smarter learning — all in one place.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#classes">Explore Classes</a>
+            <a class="btn btn-ghost" href="#materials">Browse Study Materials</a>
+          </div>
+        </div>
+        <aside class="hero-card glass" aria-label="Study thought of the moment">
+          <div class="leaf-circle" aria-hidden="true">🌿</div>
+          <p id="motivation" class="quote" aria-live="polite"></p>
+          <button id="newThought" class="btn btn-small btn-ghost" type="button">Show another thought</button>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ==================================================== -->
+    <!-- SECTION 05 — CLASS SELECTION SECTION                  -->
+    <!-- Cards are built by js/script.js from js/syllabus.js   -->
+    <!-- ==================================================== -->
+    <section id="classes" class="section">
+      <div class="container">
+        <h2>Choose your class</h2>
+        <p class="section-intro">Pick a class to see its subjects, chapters, notes, lecture notes and previous-year questions.</p>
+        <div id="classGrid" class="class-grid" role="list"></div>
+        <noscript><p class="banner-warning">GreenClass needs JavaScript to show classes and study materials. Please enable JavaScript in your browser.</p></noscript>
+      </div>
+    </section>
+
+    <!-- ==================================================== -->
+    <!-- SECTION 06 — SUBJECT SELECTION SECTION                -->
+    <!-- ==================================================== -->
+    <section id="subjects" class="section">
+      <div class="container">
+        <h2 id="subjectsTitle">Choose a subject</h2>
+        <div id="syllabusBanner" class="banner-warning" role="note"></div>
+        <div id="streamPicker" class="stream-picker" role="group" aria-label="Choose your stream" hidden></div>
+        <div id="subjectGrid" class="subject-grid" role="list"></div>
+        <p id="subjectNote" class="muted"></p>
+      </div>
+    </section>
+
+    <!-- ==================================================== -->
+    <!-- SECTION 07 — STUDY MATERIALS SECTION                  -->
+    <!-- Search + filters + results                            -->
+    <!-- ==================================================== -->
+    <section id="materials" class="section">
+      <div class="container">
+        <h2>Study materials</h2>
+        <p class="section-intro">Search by chapter, subject, class, title or file name. Results update as you type.</p>
+        <form id="filterForm" class="filter-bar glass" role="search" aria-label="Search study materials">
+          <div class="field field-wide">
+            <label for="searchInput">Search</label>
+            <input id="searchInput" type="search" placeholder="e.g. life processes, lecture notes, electrostatics" autocomplete="off">
+          </div>
+          <div class="field"><label for="fClass">Class</label><select id="fClass"></select></div>
+          <div class="field"><label for="fSubject">Subject</label><select id="fSubject"></select></div>
+          <div class="field"><label for="fChapter">Chapter</label><select id="fChapter"></select></div>
+          <div class="field"><label for="fType">Material type</label><select id="fType"></select></div>
+          <div class="field"><button id="clearFilters" class="btn btn-ghost btn-small" type="button">Clear filters</button></div>
+        </form>
+        <p id="resultsInfo" class="muted" aria-live="polite"></p>
+        <div id="resultsGrid" class="res-grid"></div>
+      </div>
+    </section>
+
+    <!-- ==================================================== -->
+    <!-- SECTION 08 — CHAPTER-WISE NOTES SECTION               -->
+    <!-- ==================================================== -->
+    <section id="notes" class="section">
+      <div class="container">
+        <h2 id="chapterTitle">Chapter-wise notes</h2>
+        <p id="chapterProgress" class="muted" aria-live="polite"></p>
+        <div id="chapterList" class="chapter-list"></div>
+      </div>
+    </section>
+
+    <!-- ==================================================== -->
+    <!-- SECTION 09 — LECTURE NOTES SECTION                    -->
+    <!-- ==================================================== -->
+    <section id="lectures" class="section">
+      <div class="container">
+        <h2>Lecture notes</h2>
+        <p class="section-intro">Lecture notes for the class and subject you selected above.</p>
+        <div id="lectureGrid" class="res-grid"></div>
+      </div>
+    </section>
+
+    <!-- ==================================================== -->
+    <!-- SECTION 10 — PREVIOUS-YEAR QUESTIONS SECTION          -->
+    <!-- ==================================================== -->
+    <section id="pyq" class="section">
+      <div class="container">
+        <h2>Previous-year questions</h2>
+        <p class="notice">Only papers that the GreenClass team has uploaded appear here. Sample and practice papers are always labelled as such and are never presented as official CBSE papers.</p>
+        <form id="pyqForm" class="filter-bar glass" aria-label="Filter previous-year questions">
+          <div class="field"><label for="pClass">Class</label><select id="pClass"></select></div>
+          <div class="field"><label for="pSubject">Subject</label><select id="pSubject"></select></div>
+          <div class="field"><label for="pCategory">Paper category</label><select id="pCategory"></select></div>
+          <div class="field"><label for="pYear">Year</label><select id="pYear"></select></div>
+          <div class="field"><label for="pDifficulty">Difficulty</label>
+            <select id="pDifficulty"><option value="">Any difficulty</option><option>Easy</option><option>Medium</option><option>Hard</option></select>
+          </div>
+          <div class="field"><label for="pQType">Question type</label>
+            <select id="pQType"><option value="">Any type</option><option>MCQ</option><option>Short answer</option><option>Long answer</option><option>Case study</option></select>
+          </div>
+        </form>
+        <div id="pyqGrid" class="res-grid"></div>
+      </div>
+    </section>
+
+    <!-- ==================================================== -->
+    <!-- SECTION 11 — PDF LIBRARY AND DOWNLOAD SECTION         -->
+    <!-- ==================================================== -->
+    <section id="library" class="section">
+      <div class="container">
+        <h2>PDF library</h2>
+        <p class="section-intro">Every PDF registered in <code>js/pdf-library.js</code>, grouped by class and subject.</p>
+        <div id="libraryStats" class="dash-grid"></div>
+        <div id="libraryList" class="library-list"></div>
+
+        <details class="admin-box glass">
+          <summary>Administrator helper: create a registry entry</summary>
+          <p class="notice">This tool only <strong>writes the code line</strong> you paste into <code>js/pdf-library.js</code>. Choosing a PDF here lets you preview it on your own device; it does <strong>not</strong> upload or publish it. To publish, copy the PDF into the matching folder under <code>pdfs/</code> and upload the folder to your hosting. A real upload feature needs a backend or storage service.</p>
+          <form id="adminForm" class="admin-form">
+            <div class="field"><label for="aClass">Class</label><select id="aClass"></select></div>
+            <div class="field"><label for="aSubject">Subject</label><select id="aSubject"></select></div>
+            <div class="field"><label for="aChapter">Chapter</label><select id="aChapter"></select></div>
+            <div class="field"><label for="aType">Resource type</label><select id="aType"></select></div>
+            <div class="field field-wide"><label for="aTitle">Display title</label><input id="aTitle" type="text" placeholder="Life Processes — Detailed Notes"></div>
+            <div class="field field-wide"><label for="aPdf">Choose the PDF (optional, for preview and file name)</label><input id="aPdf" type="file" accept="application/pdf"></div>
+            <div class="field field-wide"><label for="aDesc">Short description</label><input id="aDesc" type="text"></div>
+            <div class="field"><label for="aYear">Exam year (PYQs)</label><input id="aYear" type="number" min="1990" max="2100"></div>
+            <div class="field"><label for="aStatus">Status</label><select id="aStatus"><option value="available">available</option><option value="coming-soon">coming-soon</option></select></div>
+          </form>
+          <label for="adminOutput" class="block-label">Copy this into <code>GC_PDF_LIBRARY</code> (remember the comma between entries)</label>
+          <textarea id="adminOutput" rows="9" readonly></textarea>
+          <div class="admin-actions">
+            <button id="copyEntry" class="btn btn-primary btn-small" type="button">Copy entry</button>
+            <a id="previewLink" class="btn btn-ghost btn-small" href="#library" target="_blank" rel="noopener" hidden>Preview chosen PDF on this device</a>
+          </div>
+          <p id="adminPath" class="muted"></p>
+        </details>
+      </div>
+    </section>
+
+    <!-- ==================================================== -->
+    <!-- SECTION 12 — QUIZ AND PRACTICE SECTION                -->
+    <!-- ==================================================== -->
+    <section id="quiz" class="section">
+      <div class="container">
+        <h2>Quiz and practice</h2>
+        <p class="notice">These are <strong>sample practice questions</strong> written for GreenClass. They are not official CBSE examination questions.</p>
+        <form id="quizForm" class="filter-bar glass" aria-label="Choose a quiz">
+          <div class="field"><label for="qzClass">Class</label><select id="qzClass"></select></div>
+          <div class="field"><label for="qzSubject">Subject</label><select id="qzSubject"></select></div>
+          <div class="field"><label for="qzChapter">Chapter</label><select id="qzChapter"></select></div>
+          <div class="field"><button id="startQuiz" class="btn btn-primary btn-small" type="submit">Start quiz</button></div>
+        </form>
+        <div id="quizArea" class="quiz-card glass" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <!-- ==================================================== -->
+    <!-- SECTION 13 — STUDY PLANNER AND PROGRESS SECTION       -->
+    <!-- ==================================================== -->
+    <section id="planner" class="section">
+      <div class="container">
+        <h2>Study planner and progress</h2>
+        <p class="notice">Your checklist, reminders, bookmarks and progress are saved in <strong>this browser on this device only</strong>. They do not sync to other devices, and clearing your browser data removes them. GreenClass does not collect personal information.</p>
+
+        <div id="dashStats" class="dash-grid"></div>
+
+        <div class="planner-grid">
+          <article class="glass planner-card">
+            <h3>Daily study checklist</h3>
+            <form id="taskForm" class="inline-form">
+              <label for="taskInput" class="sr-only">New task</label>
+              <input id="taskInput" type="text" placeholder="e.g. Read Life Processes, solve 10 sums" maxlength="120" required>
+              <button class="btn btn-primary btn-small" type="submit">Add task</button>
+            </form>
+            <ul id="taskList" class="check-list"></ul>
+            <button id="resetTasks" class="btn btn-ghost btn-small" type="button">Start a new day (untick all)</button>
+          </article>
+
+          <article class="glass planner-card">
+            <h3>Revision reminders</h3>
+            <form id="remForm" class="inline-form">
+              <label for="remText" class="sr-only">Reminder</label>
+              <input id="remText" type="text" placeholder="What should you revise?" maxlength="120" required>
+              <label for="remDate" class="sr-only">Revise on</label>
+              <input id="remDate" type="date" required>
+              <button class="btn btn-primary btn-small" type="submit">Add reminder</button>
+            </form>
+            <ul id="remList" class="check-list"></ul>
+          </article>
+
+          <article class="glass planner-card">
+            <h3>Progress by class</h3>
+            <div id="progressBars"></div>
+          </article>
+
+          <article class="glass planner-card">
+            <h3>Recently opened</h3>
+            <ul id="recentList" class="plain-list"></ul>
+            <h3>Bookmarks</h3>
+            <ul id="bookmarkList" class="plain-list"></ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================================================== -->
+    <!-- SECTION 14 — ABOUT GREENCLASS SECTION                 -->
+    <!-- ==================================================== -->
+    <section id="about" class="section">
+      <div class="container about-grid">
+        <div class="glass about-card">
+          <h2>About GreenClass</h2>
+          <p>GreenClass is a free study space for students of Classes 8 to 12 following the CBSE curriculum. Notes, lecture notes and papers are added by the site owner, so some chapters may say <em>“Study material coming soon.”</em> We would rather tell you that than show a broken link.</p>
+          <p>Syllabus lists are labelled with their verification status. Always confirm the current syllabus on the official CBSE website.</p>
+        </div>
+        <div class="glass about-card" id="contact">
+          <h2>Contact</h2>
+          <p>Questions, corrections or material to share? Write to the site owner.</p>
+          <p><a class="btn btn-primary btn-small" href="mailto:your-email@example.com">Email GreenClass</a></p>
+          <p class="muted">Site owner:<code>asrartariq01@gmail.com</code></p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==================================================== -->
+  <!-- SECTION 15 — FOOTER                                   -->
+  <!-- ==================================================== -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div><strong>GreenClass</strong><br><span class="muted">Learn at Your Own Pace</span></div>
+      <ul class="plain-list footer-links" aria-label="Footer links">
+        <li><a href="#classes">Classes</a></li>
+        <li><a href="#materials">Study Materials</a></li>
+        <li><a href="#pyq">PYQs</a></li>
+        <li><a href="#quiz">Quizzes</a></li>
+        <li><a href="#planner">Study Planner</a></li>
+        <li><a href="https://cbseacademic.nic.in" target="_blank" rel="noopener">CBSE Academic (official)</a></li>
+        <li><a href="https://ncert.nic.in" target="_blank" rel="noopener">NCERT (official)</a></li>
+      </ul>
+      <p class="muted">GreenClass is an independent study project and is not affiliated with CBSE or NCERT.</p>
+    </div>
+  </footer>
+
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+
+  <!-- ==================================================== -->
+  <!-- SECTION 16 — JAVASCRIPT FILE CONNECTIONS              -->
+  <!-- Keep this order: data files first, script.js last.    -->
+  <!-- ==================================================== -->
+  <script src="js/syllabus.js"></script>
+  <script src="js/pdf-library.js"></script>
+  <script src="js/quiz.js"></script>
+  <script src="js/script.js"></script>
+</body>
+</html>
